@@ -1,17 +1,16 @@
 # sftp
 
-Terraform code for deploying and managing Azure SFTP-enabled storage accounts for secure file transfer, with separate configurations for production and non-production environments.
+Terraform code for deploying and managing an Azure SFTP-enabled storage account for secure file transfer.
 
 ## Overview
 
-This folder provisions Azure Storage Accounts with SFTP enabled via Hierarchical Namespace (HNS), providing a secure, managed file transfer capability. Both environments are deployed with private endpoints for blob and Data Lake (DFS) access, network access restrictions, and full diagnostic logging for audit and compliance purposes.
+This folder provisions an Azure Storage Account with SFTP enabled via Hierarchical Namespace (HNS), providing a secure, managed file transfer capability. The environment is deployed with private endpoints for blob and Data Lake (DFS) access, network access restrictions, and full diagnostic logging for audit and compliance purposes.
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `sftp_np.tf` | Resource group, non-production SFTP storage account (ZRS replication), private endpoints for blob and DFS, diagnostic logging |
-| `sftp_prod.tf` | Production SFTP storage account (GZRS replication), private endpoints for blob and DFS, diagnostic logging |
+| `sftp_np.tf` | Resource group, SFTP storage account (ZRS replication), private endpoints for blob and DFS, diagnostic logging |
 
 ## Architecture Decisions
 
@@ -26,14 +25,11 @@ A traditional VM-hosted SFTP server was considered but Azure Storage SFTP was ch
 
 ### Replication Strategy
 
-| Environment | Replication |
-|-------------|-------------|
-| Non-production | ZRS (Zone Redundant Storage) — resilient within a region, cost effective for non-critical data |
-| Production | GZRS (Geo-Zone Redundant Storage) — zone redundant with cross-region replication for maximum durability |
+ZRS (Zone Redundant Storage) is used — resilient across availability zones within a region, providing high availability without the cost of cross-region replication.
 
 ### Network Access
 
-Both storage accounts use `default_action = "Deny"` — all access is blocked by default. Access is permitted only from:
+The storage account uses `default_action = "Deny"` — all access is blocked by default. Access is permitted only from:
 - Specific whitelisted IP ranges (defined in locals)
 - Approved VNet subnets via service endpoints
 
@@ -56,4 +52,3 @@ These are standard Terraform constructs — in a real deployment they would refe
 ## Author
 
 Paul Boardman — [linkedin.com/in/paulboardman76](https://linkedin.com/in/paulboardman76)
-
