@@ -1,15 +1,31 @@
-acr — Azure Container Registry configurations and Terraform code for managing private container registries, including access policies and replication settings.
+# azure-terraform
 
-agents — Terraform code for provisioning and managing Azure DevOps agents and self-hosted runner infrastructure.
+A collection of sanitised Terraform code for deploying and managing enterprise-grade Azure infrastructure, based on real-world production deployments.
 
-example-environment — A complete, sanitised example of an environment stack — intended as a reference architecture demonstrating how networking, compute, security and operations components fit together.
+## Overview
 
-image — Terraform code and configuration for managing Azure VM images and image galleries.
+This repository demonstrates infrastructure patterns and best practices for building secure, scalable, and highly available Azure environments. All code is sanitised — no real credentials, subscription IDs, IP ranges, or company-specific configurations are included.
 
-modules — Reusable Terraform modules used across the repository. Each module is self-contained with its own variables, outputs and documentation.
+## Structure
 
-network — Terraform code for Azure networking infrastructure including Virtual WAN, Azure Firewall, Virtual Networks, subnets, NSGs, Private DNS Zones and VPN configuration.
+| Folder | Description |
+|--------|-------------|
+| `network` | Virtual WAN, Firewall, VNets, NSGs, Private DNS, VPN |
+| `operations` | Monitoring, alerting, Key Vaults, Storage, shared services |
+| `example-environment` | Reference architecture — full environment stack end to end |
+| `acr` | Azure Container Registry, access policies, replication |
+| `agents` | Azure DevOps self-hosted agent infrastructure |
+| `image` | VM images and Azure image galleries |
+| `sftp` | SFTP-enabled storage accounts for secure file transfer |
+| `modules` | Reusable Terraform modules used across the repository |
 
-operations — Terraform code for centralised operational services including monitoring, alerting, Log Analytics, Key Vaults, Storage Accounts and shared infrastructure components.
+## Principles
 
-sftp — Terraform code for deploying and configuring Azure SFTP-enabled storage accounts for secure file transfer.
+- All environments built private by default — no public exposure
+- Infrastructure as Code via Terraform and HCP Terraform Cloud
+- Consistent governance: Management Groups, RBAC, Azure Policy
+- Modular and reusable — designed to scale
+
+## Author
+
+Paul Boardman — [linkedin.com/in/paulboardman76](https://linkedin.com/in/paulboardman76)
