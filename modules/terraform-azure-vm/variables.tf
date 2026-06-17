@@ -9,7 +9,7 @@ variable "vmname" {
 }
 
 variable "env" {
-  description = "environment stack - might be dev, uq, qual, val, prod, dr"
+  description = "environment stack - might be dev, prod, dr"
   type        = string
   default     = "null"
 }
